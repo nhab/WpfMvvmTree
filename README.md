@@ -3,6 +3,7 @@ A hello world, getting started project to show a WPF TreeView Binding into a hie
 
 ##Steps
 
+Create a c:\Temp folder in your windows harddrive and create Hierarchial folders inside it. Then follow these Steps:
 1- Add Tree Model:
 ```
   public class TreeModel

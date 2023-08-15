@@ -29,12 +29,13 @@ A hello world, getting started project to show a WPF TreeView Binding into a hie
 
         private void LoadFolder(string path, ObservableCollection<TreeModel> col)
         {
-            TreeModel folder = new TreeModel() {
-               Name = IO.Path.GetFileNameWithoutExtension(path)
-             };
-            col.Add(folder);
-            foreach (var dir in Directory.GetDirectories(path))
-               LoadFolder(dir, folder.Children);
+           TreeModel tree = new TreeModel() 
+            { 
+                Name = IO.Path.GetFileNameWithoutExtension(path) 
+            };
+            col.Add(tree);
+            foreach (var dir in Directory.GetDirectories(path)) 
+                LoadFolder(dir, tree.Children);
         }
        
     }

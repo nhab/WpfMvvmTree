@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 namespace WpfMvvmTree
 {
 
-    public class ItemModel
+    public class TreeModel
     {
         public string Name { get; set; }
-        public ObservableCollection<ItemModel> Children { get; set; } = new ObservableCollection<ItemModel>();
+        public ObservableCollection<TreeModel> Children 
+        { get; set; } = new ObservableCollection<TreeModel>();
     }
 }

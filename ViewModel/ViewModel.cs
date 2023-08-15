@@ -13,22 +13,30 @@ using IO = System.IO;
 namespace WpfMvvmTree
 {
    public class ViewModel
-    {
+    { 
+        private CollectionViewSource cvs = new CollectionViewSource();
+        private ObservableCollection<TreeModel> col = new ObservableCollection<TreeModel>();
+
+        public ICollectionView View { get => cvs.View; }
+
         public ViewModel()
         {
             string path = @"c:\temp";
-            foreach (var dir in Directory.GetDirectories(path)) LoadFolder(dir, col);
+            foreach (var dir in Directory.GetDirectories(path)) 
+                LoadFolder(dir, col);
             cvs.Source = col;
         }
 
-        private void LoadFolder(string path, ObservableCollection<ItemModel> col)
+        private void LoadFolder(string path, ObservableCollection<TreeModel> col)
         {
-            ItemModel folder = new ItemModel() { Name = IO.Path.GetFileNameWithoutExtension(path) };
-            col.Add(folder);
-            foreach (var dir in Directory.GetDirectories(path)) LoadFolder(dir, folder.Children);
+            TreeModel tree = new TreeModel() 
+            { 
+                Name = IO.Path.GetFileNameWithoutExtension(path) 
+            };
+            col.Add(tree);
+            foreach (var dir in Directory.GetDirectories(path)) 
+                LoadFolder(dir, tree.Children);
         }
-        public ICollectionView View { get => cvs.View; }
-        private CollectionViewSource cvs = new CollectionViewSource();
-        private ObservableCollection<ItemModel> col = new ObservableCollection<ItemModel>();
+       
     }
 }

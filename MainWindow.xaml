@@ -12,7 +12,7 @@
         <TreeView ItemsSource="{Binding View}">
             <TreeView.Resources>
                 <HierarchicalDataTemplate
-                    DataType="{x:Type wpfmvvmtree:ItemModel}" 
+                    DataType="{x:Type wpfmvvmtree:TreeModel}" 
                     ItemsSource="{Binding Children}">
                     <TextBlock Text="{Binding Name}"/>
                 </HierarchicalDataTemplate>

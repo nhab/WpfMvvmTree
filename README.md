@@ -8,8 +8,8 @@ A hello world, getting started project to show a WPF TreeView Binding into a hie
   public class TreeModel
     {
         public string Name { get; set; }
-        public ObservableCollection<TreeModel> Children 
-        { get; set; } = new ObservableCollection<TreeModel>();
+        public ObservableCollection<TreeModel> Children  { get; set; }
+                               = new ObservableCollection<TreeModel>();
     }
 ```
 2- Create a ViewModel and Fill the Tree in ViewModel

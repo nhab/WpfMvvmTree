@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-
+using System.Windows.Input;
+using System.Windows.Media.Animation;
+using WpfMvvmTree.Base;
 using IO = System.IO;
-
 namespace WpfMvvmTree
 {
    public class ViewModel
@@ -23,30 +24,32 @@ namespace WpfMvvmTree
         {
             cvs = new CollectionViewSource();
             col = new ObservableCollection<TreeModel>();
-            //string path = @"c:\temp";
-            //foreach (var dir in Directory.GetDirectories(path)) 
-            //    LoadFolder(dir, col);
+      
             TreeModel root1 = new TreeModel("Root 1");
-            
-            TreeModel child1=new TreeModel("Child 1");
-            TreeModel child2 = new TreeModel("Child 2");
-            root1.Children.Add(child1) ;
-            root1.Children.Add(child2);
+       
+            root1.Children.Add(new TreeModel("Child 1")) ;
+            root1.Children.Add(new TreeModel("Child 2"));
             col.Add(root1);
             
             cvs.Source = col;
+           
         }
 
-        //private void LoadFolder(string path, ObservableCollection<TreeModel> col)
-        //{
-        //    TreeModel tree = new TreeModel() 
-        //    { 
-        //        Name = IO.Path.GetFileNameWithoutExtension(path) 
-        //    };
-        //    col.Add(tree);
-        //    foreach (var dir in Directory.GetDirectories(path)) 
-        //        LoadFolder(dir, tree.Children);
-        //}
-       
+        RelayCommand addParentCommand;
+
+        public ICommand AddParentCommand
+        {
+            get
+            {
+                if (addParentCommand == null)
+                    addParentCommand = new RelayCommand(AddParent);
+                return addParentCommand;
+            }
+
+        }
+        private void AddParent(object parameter)
+        {
+            col.Add(new TreeModel { Name = "New Parent", Children = new ObservableCollection<TreeModel>() });
+        }
     }
 }

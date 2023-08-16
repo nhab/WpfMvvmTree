@@ -1,13 +1,16 @@
 # Wpf Mvvm Tree view
 A hello world, getting started project to show a WPF TreeView Binding into a hierarchical data of a ViewModel
+
 ##Steps
+
+Create a c:\Temp folder in your windows harddrive and create Hierarchial folders inside it. Then follow these Steps:
 1- Add Tree Model:
 ```
   public class TreeModel
     {
         public string Name { get; set; }
-        public ObservableCollection<TreeModel> Children 
-        { get; set; } = new ObservableCollection<TreeModel>();
+        public ObservableCollection<TreeModel> Children  { get; set; }
+                               = new ObservableCollection<TreeModel>();
     }
 ```
 2- Create a ViewModel and Fill the Tree in ViewModel

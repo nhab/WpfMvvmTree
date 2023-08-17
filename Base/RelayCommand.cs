@@ -35,6 +35,7 @@ namespace WpfMvvmTree.Base
         {
             _execute(parameter);
         }
+
     }
     
 }

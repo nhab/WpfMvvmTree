@@ -23,13 +23,20 @@
                     <TextBlock Text="{Binding Name}" />
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
+            <TreeView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem
+                        Command="{Binding AddParentCommand}"
+                        CommandParameter="{Binding PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                        Header="Add" />
+                </ContextMenu>
+            </TreeView.ContextMenu>
         </TreeView>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBox
                 Name="txt1"
                 Width="200"
                 Text="" />
-            <Button Command="{Binding AddParentCommand}" Content="Add" />
         </StackPanel>
     </Grid>
 </Window>

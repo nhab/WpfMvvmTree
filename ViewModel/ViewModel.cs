@@ -4,8 +4,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -17,6 +19,7 @@ namespace WpfMvvmTree
     { 
         private CollectionViewSource cvs;
         private ObservableCollection<TreeModel> col;
+        RelayCommand addParentCommand;
 
         public ICollectionView View { get => cvs.View; }
 
@@ -35,7 +38,7 @@ namespace WpfMvvmTree
            
         }
 
-        RelayCommand addParentCommand;
+
 
         public ICommand AddParentCommand
         {
@@ -47,9 +50,41 @@ namespace WpfMvvmTree
             }
 
         }
+   
+     
         private void AddParent(object parameter)
         {
-            col.Add(new TreeModel { Name = "New Parent", Children = new ObservableCollection<TreeModel>() });
+            
+            if (parameter is TreeModel selectedItm)
+            {
+                TreeModel newNode = new TreeModel
+                {
+                    Name = "New Parent",
+                    Children = new ObservableCollection<TreeModel>()
+                };
+
+                foreach (TreeModel child in col)
+                {
+                    if (child.id == selectedItm.id)
+                    {
+                        child.Children.Add(newNode);
+                    }else
+                    {
+                        if(child.Children.Count>0)
+                            foreach (TreeModel grandchild in child.Children)
+                            {
+                                if (grandchild.id == selectedItm.id)
+                                {
+                                    grandchild.Children.Add(newNode);
+                                }
+                            }
+                    }
+                }
+
+              
+            }
         }
+
+
     }
 }

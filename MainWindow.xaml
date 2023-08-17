@@ -20,13 +20,13 @@
         <TreeView ItemsSource="{Binding View}">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type wpfmvvmtree:TreeModel}" ItemsSource="{Binding Children}">
-                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Name,Mode=TwoWay}" />
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
             <TreeView.ContextMenu>
                 <ContextMenu>
                     <MenuItem
-                        Command="{Binding AddParentCommand}"
+                        Command="{Binding AddCommand}"
                         CommandParameter="{Binding PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                         Header="Add" />
                 </ContextMenu>
